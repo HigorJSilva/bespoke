@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginUserRequest;
 use App\Http\Requests\Auth\StoreUserRequest;
 use App\Http\Services\Auth\UserLoginService;
+use App\Http\Services\Auth\UserLogoutService;
 use App\Http\Services\Auth\UserRegisterService;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -28,5 +30,12 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $user->createToken('apiToken')->plainTextToken
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        (new UserLogoutService)->run($request);
+
+        return response()->noContent();
     }
 }
