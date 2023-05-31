@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 class UserRegisterService
 {
 
-  public function store(object $userData)
+  public function run(object $userData)
   {
     $userData->password = Hash::make($userData->password);
     return User::create((array) $userData);

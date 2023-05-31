@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function register(StoreUserRequest $request)
     {
-        $user = (new UserRegisterService)->store((object) $request->validated());
+        $user = (new UserRegisterService)->run((object) $request->validated());
 
         return response()->json([
             'user' => $user,
